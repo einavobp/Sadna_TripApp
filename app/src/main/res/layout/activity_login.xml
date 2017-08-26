@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/light_blue"
-                tools:context="proj.sadna.mta.sadna_2017.App.Activities.LoginActivity">
+                tools:context="proj.sadna.mta.sadna_2017.app.Activities.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/logo"

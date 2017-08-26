@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Adapters;
+package proj.sadna.mta.sadna_2017.app.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
-import proj.sadna.mta.sadna_2017.App.Activities.SiteOverviewActivity;
-import proj.sadna.mta.sadna_2017.App.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.Activities.SiteOverviewActivity;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.R;
 
 /**

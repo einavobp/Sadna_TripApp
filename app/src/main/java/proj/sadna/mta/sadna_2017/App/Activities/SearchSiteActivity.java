@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Activities;
+package proj.sadna.mta.sadna_2017.app.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import proj.sadna.mta.sadna_2017.App.Adapters.SiteAdapter;
-import proj.sadna.mta.sadna_2017.App.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.Adapters.SiteAdapter;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.R;
 
 public class SearchSiteActivity extends AppCompatActivity

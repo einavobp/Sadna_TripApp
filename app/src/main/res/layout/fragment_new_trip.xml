@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="proj.sadna.mta.sadna_2017.App.Fragments.NewTripFragment">
+             tools:context="proj.sadna.mta.sadna_2017.app.Fragments.NewTripFragment">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +10,7 @@
         android:id="@+id/activity_set_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="proj.sadna.mta.sadna_2017.App.Activities.SetDataActivity">
+        tools:context="proj.sadna.mta.sadna_2017.app.Activities.SetDataActivity">
 
         <RelativeLayout
             android:id="@+id/header"

@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Fragments;
+package proj.sadna.mta.sadna_2017.app.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import proj.sadna.mta.sadna_2017.App.Activities.PathActivity;
+import proj.sadna.mta.sadna_2017.app.Activities.PathActivity;
 import proj.sadna.mta.sadna_2017.R;
 
 public class NewTripFragment extends Fragment

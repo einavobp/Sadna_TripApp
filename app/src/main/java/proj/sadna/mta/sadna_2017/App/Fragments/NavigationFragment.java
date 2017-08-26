@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Fragments;
+package proj.sadna.mta.sadna_2017.app.Fragments;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,10 +18,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import proj.sadna.mta.sadna_2017.App.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.R;
 
-import static proj.sadna.mta.sadna_2017.App.Utils.AppConstants.REQUEST_LOCATION;
+import static proj.sadna.mta.sadna_2017.app.Utils.AppConstants.REQUEST_LOCATION;
 
 /**
  * Created by Einav on 22/07/2017.

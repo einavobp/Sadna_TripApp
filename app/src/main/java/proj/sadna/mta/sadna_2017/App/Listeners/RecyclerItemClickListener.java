@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Listeners;
+package proj.sadna.mta.sadna_2017.app.Listeners;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

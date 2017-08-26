@@ -9,12 +9,11 @@ import android.view.ViewGroup;
 import proj.sadna.mta.sadna_2017.R;
 
 /**
- * Created by Einav on 21/07/2017.
+ * Created by Einav on 26/08/2017.
  */
-
-public class OpeningHourFragment extends Fragment
+public class RecommendedPathFragment extends Fragment
 {
-    public OpeningHourFragment()
+    public RecommendedPathFragment()
     {
 
     }
@@ -23,13 +22,13 @@ public class OpeningHourFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_opening_hours, container, false);
+        return inflater.inflate(R.layout.fragment_recommendeds_paths, container, false);
     }
 
     public static Fragment newInstance()
     {
         Bundle args = new Bundle();
-        OpeningHourFragment fragment = new OpeningHourFragment();
+        RecommendedPathFragment fragment = new RecommendedPathFragment();
         fragment.setArguments(args);
 
         return fragment;

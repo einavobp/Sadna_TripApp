@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Fragments;
+package proj.sadna.mta.sadna_2017.app.Fragments;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import proj.sadna.mta.sadna_2017.App.Activities.SiteOverviewActivity;
-import proj.sadna.mta.sadna_2017.App.Adapters.GalleryAdapter;
+import proj.sadna.mta.sadna_2017.app.Activities.SiteOverviewActivity;
+import proj.sadna.mta.sadna_2017.app.Adapters.GalleryAdapter;
 import proj.sadna.mta.sadna_2017.R;
 
 /**
