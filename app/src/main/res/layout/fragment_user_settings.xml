@@ -42,7 +42,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="9.0dp"
             android:layout_toRightOf="@id/_feedback_ic"
-            android:text="About us"
+            android:text="Contact us"
             android:textColor="#111111"
             android:textSize="17.18888sp"/>
     </RelativeLayout>

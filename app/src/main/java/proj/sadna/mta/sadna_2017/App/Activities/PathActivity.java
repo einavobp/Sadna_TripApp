@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Activities;
+package proj.sadna.mta.sadna_2017.app.Activities;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -29,8 +29,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-import proj.sadna.mta.sadna_2017.App.Adapters.BaseSwipListAdapter;
-import proj.sadna.mta.sadna_2017.App.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.R;
 
 public class PathActivity extends AppCompatActivity

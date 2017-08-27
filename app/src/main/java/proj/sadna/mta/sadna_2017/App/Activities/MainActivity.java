@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Activities;
+package proj.sadna.mta.sadna_2017.app.Activities;
 
 import android.app.FragmentManager;
 import android.graphics.Color;
@@ -16,9 +16,12 @@ import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 
 import java.util.ArrayList;
 
-import proj.sadna.mta.sadna_2017.App.Adapters.AppPagerAdapter;
-import proj.sadna.mta.sadna_2017.App.Fragments.NewTripFragment;
-import proj.sadna.mta.sadna_2017.App.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.Adapters.AppPagerAdapter;
+import proj.sadna.mta.sadna_2017.app.Fragments.MyPathsFragment;
+import proj.sadna.mta.sadna_2017.app.Fragments.NewTripFragment;
+import proj.sadna.mta.sadna_2017.app.Fragments.RecommendedPathFragment;
+import proj.sadna.mta.sadna_2017.app.Fragments.UserSettingsFragment;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.R;
 
 public class MainActivity extends AppCompatActivity
@@ -177,9 +180,9 @@ public class MainActivity extends AppCompatActivity
     {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new NewTripFragment());
-        fragments.add(new Fragment());
-        fragments.add(new Fragment());
-        fragments.add(new Fragment());
+        fragments.add(new RecommendedPathFragment());
+        fragments.add(new MyPathsFragment());
+        fragments.add(new UserSettingsFragment());
         return fragments;
     }
 

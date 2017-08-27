@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Activities;
+package proj.sadna.mta.sadna_2017.app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package proj.sadna.mta.sadna_2017.App.Adapters;
+package proj.sadna.mta.sadna_2017.app.Adapters;
 
 import android.widget.BaseAdapter;
 

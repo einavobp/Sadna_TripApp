@@ -1,4 +1,6 @@
-package proj.sadna.mta.sadna_2017.App.Models;
+package proj.sadna.mta.sadna_2017.app.Models;
+
+import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 
@@ -6,11 +8,18 @@ import java.util.ArrayList;
  * Created by Einav on 22/07/2017.
  */
 
-public class SiteModel
+public class SiteModel extends SugarRecord
 {
     private String fullName;
     private String shortName;
     private String address;
+    private int type;
+    private ArrayList<String> imageUrl;
+    private double lat, lng;
+    private String phoneNumber;
+    private String profilePicture;
+    private String description;
+    private String email;
 
     public String getProfilePicture()
     {
@@ -22,12 +31,6 @@ public class SiteModel
         this.profilePicture = profilePicture;
     }
 
-    private String profilePicture;
-
-    private int type;
-    private ArrayList<String> imageUrl;
-    private double lat, lng;
-
     public String getPhoneNumber()
     {
         return phoneNumber;
@@ -38,7 +41,6 @@ public class SiteModel
         this.phoneNumber = phoneNumber;
     }
 
-    private String phoneNumber;
     public String getDescription()
     {
         return description;
@@ -48,8 +50,6 @@ public class SiteModel
     {
         this.description = description;
     }
-
-    private String description;
 
     public String getEmail()
     {
@@ -61,10 +61,10 @@ public class SiteModel
         this.email = email;
     }
 
-    private String email;
     public SiteModel()
     {
     }
+
     public String getShortName()
     {
         return shortName;
