@@ -22,16 +22,16 @@
             android:value="AIzaSyB0i0HMagS-phsi28t5E9MF5CrgfBOgWPg"/>
 
         <activity android:name=".App.Activities.MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".App.Activities.IntroSplashActivity">
         </activity>
         <activity android:name=".App.Activities.SetDataActivity"/>
         <activity android:name=".App.Activities.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity android:name=".App.Activities.SitesActivity">
         </activity>

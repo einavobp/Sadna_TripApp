@@ -86,6 +86,7 @@ public class SiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             name.setText(siteModel.getShortName());
             description.setText(siteModel.getDescription());
+
             click.setOnClickListener(new View.OnClickListener()
             {
                 @Override

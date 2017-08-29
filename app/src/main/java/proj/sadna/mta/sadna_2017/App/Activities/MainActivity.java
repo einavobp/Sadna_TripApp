@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import proj.sadna.mta.sadna_2017.App.Adapters.AppPagerAdapter;
 import proj.sadna.mta.sadna_2017.App.Fragments.NewTripFragment;
+import proj.sadna.mta.sadna_2017.App.Fragments.TopTripsFragment;
+import proj.sadna.mta.sadna_2017.App.Fragments.MyTripsFragment;
 import proj.sadna.mta.sadna_2017.App.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.R;
 
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         mTabLayout.getTabAt(1).setCustomView(R.layout.ic_top);
         mTabLayout.getTabAt(2).setCustomView(R.layout.ic_mine);
         mTabLayout.getTabAt(3).setCustomView(R.layout.ic_settings);
-
 
         mPager.addOnPageChangeListener(mOnPageChangedListener);
 
@@ -177,8 +178,8 @@ public class MainActivity extends AppCompatActivity
     {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new NewTripFragment());
-        fragments.add(new Fragment());
-        fragments.add(new Fragment());
+        fragments.add(new TopTripsFragment());
+        fragments.add(new MyTripsFragment());
         fragments.add(new Fragment());
         return fragments;
     }
