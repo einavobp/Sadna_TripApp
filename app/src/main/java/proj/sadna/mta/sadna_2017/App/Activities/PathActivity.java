@@ -29,9 +29,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
+import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
-import proj.sadna.mta.sadna_2017.R;
 
 public class PathActivity extends AppCompatActivity
 {
@@ -39,13 +39,22 @@ public class PathActivity extends AppCompatActivity
     private List<SiteModel> mAppList;
     private AppAdapter mAdapter;
     private SwipeMenuListView mListView;
+    private ImageView mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_path);
-
+        mMap = (ImageView) findViewById(R.id.map);
+        mMap.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                PathActivity.this.startActivity(new Intent(PathActivity.this, PathOnMapActivity.class));
+            }
+        });
         mAppList = getSitesFromServer();
 
         mListView = (SwipeMenuListView) findViewById(R.id.my_path);
@@ -184,6 +193,12 @@ public class PathActivity extends AppCompatActivity
         List<SiteModel> sites = new ArrayList<>();
         for (int i = 0; i < 5; i++)
         {
+            if (i == 1)
+                site.setProfilePicture("https://www.rd.com/wp-content/uploads/sites/2/2016/01/01-statue-of-liberty-facts.jpg");
+            if (i == 2)
+                site.setProfilePicture("http://vignette4.wikia.nocookie.net/penguinsofmadagascar/images/b/bc/Central_Park_Zoo.png/revision/latest?cb=20131120080856");
+            if (i == 3)
+                site.setProfilePicture("http://www.freetoursbyfoot.com/wp-content/uploads/2013/02/New-York-Food-Tours.jpg");
             sites.add(site);
         }
         return sites;
@@ -258,9 +273,10 @@ public class PathActivity extends AppCompatActivity
             Glide.with(PathActivity.this).load(item.getProfilePicture()).
                     crossFade().
                     diskCacheStrategy(DiskCacheStrategy.ALL).
-                    into(holder.iv_icon);
-            holder.tv_name.setText(item.getFullName());
-            holder.iv_icon.setOnClickListener(new View.OnClickListener()
+                    into(holder.image);
+            holder.siteName.setText(item.getFullName());
+            holder.siteDescription.setText(item.getAddress());
+            holder.image.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
@@ -268,7 +284,7 @@ public class PathActivity extends AppCompatActivity
                     PathActivity.this.startActivity(new Intent(PathActivity.this, SiteOverviewActivity.class));
                 }
             });
-            holder.tv_name.setOnClickListener(new View.OnClickListener()
+            holder.siteName.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
@@ -281,13 +297,17 @@ public class PathActivity extends AppCompatActivity
 
         class ViewHolder
         {
-            ImageView iv_icon;
-            TextView tv_name;
+            ImageView image;
+            TextView siteName;
+            TextView siteDescription;
+            TextView siteCategories;
 
             public ViewHolder(View view)
             {
-                iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
-                tv_name = (TextView) view.findViewById(R.id.tv_name);
+                image = (ImageView) view.findViewById(R.id.site_img);
+                siteName = (TextView) view.findViewById(R.id.site_name);
+                siteDescription = (TextView) view.findViewById(R.id.site_short_desc);
+                siteCategories = (TextView) view.findViewById(R.id.site_category);
                 view.setTag(this);
             }
         }

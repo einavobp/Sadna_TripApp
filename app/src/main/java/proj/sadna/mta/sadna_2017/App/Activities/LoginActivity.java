@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import proj.sadna.mta.sadna_2017.R;
+import proj.sadna.mta.sadna_2017.app.TripAppPreferences;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -376,7 +377,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success)
             {
-
+                TripAppPreferences.setUserLogged(true);
                 LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 LoginActivity.this.finish();
             } else

@@ -3,7 +3,6 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="proj.sadna.mta.sadna_2017">
 
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -16,7 +15,7 @@
     <application
         android:name=".app.TripApplication"
         android:allowBackup="true"
-        android:icon="@drawable/luggage"
+        android:icon="@drawable/appic"
         android:label="TripApp"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
@@ -24,7 +23,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB0i0HMagS-phsi28t5E9MF5CrgfBOgWPg"/>
-
         <meta-data
             android:name="DATABASE"
             android:value="trips.db"/>
@@ -39,16 +37,16 @@
             android:value="proj.sadna.mta.sadna_2017.App.Models"/>
 
         <activity android:name=".app.Activities.MainActivity">
-
         </activity>
         <activity android:name=".app.Activities.IntroSplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".app.Activities.SetDataActivity"/>
         <activity android:name=".app.Activities.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".app.Activities.SitesActivity">
         </activity>
@@ -60,7 +58,11 @@
             android:name=".app.Activities.SearchSiteActivity"
             android:label="@string/title_activity_search_site">
         </activity>
-        <activity android:name=".app.Activities.ReadyPathActivity">
+        <activity
+            android:name=".app.Activities.PathOnMapActivity"
+            android:label="@string/title_activity_path_on_map"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
+
 </manifest>

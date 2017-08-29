@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Activities.SiteOverviewActivity;
 import proj.sadna.mta.sadna_2017.app.Adapters.GalleryAdapter;
-import proj.sadna.mta.sadna_2017.R;
 
 /**
  * Created by Einav on 22/07/2017.

@@ -12,6 +12,7 @@ public class TripAppPreferences
     private static final String PREFS_NAME = "TripAppPreferences";
     private static final String KEY_USER_ID = "user_id";
     private static final String TAG = TripAppPreferences.class.getSimpleName();
+    private static final String KEY_USER_LOGGED = "user_logged";
     private static SharedPreferences mPreferences;
     private static TripAppPreferences instance = new TripAppPreferences();
     private static final String KEY_FACEBOOK_ID = "facebook_id";
@@ -22,6 +23,7 @@ public class TripAppPreferences
     private static final String KEY_USER_DESCRIPTION = "description";
     private static final String FCM_TOKEN_KEY = "fcmtoken";
     private static final String UNREAD_COUNT = "unread_count";
+    private static boolean userLogged;
 
     private TripAppPreferences()
     {
@@ -116,6 +118,7 @@ public class TripAppPreferences
 
     public static void logout()
     {
+
         mPreferences.edit().remove(KEY_USER_ID).apply();
         mPreferences.edit().commit();
 
@@ -145,5 +148,16 @@ public class TripAppPreferences
     public static void resetUnreadCount()
     {
         mPreferences.edit().putInt(UNREAD_COUNT, 0).commit();
+    }
+
+    public static void setUserLogged(boolean userLogged)
+    {
+        mPreferences.edit().putBoolean(KEY_USER_LOGGED, userLogged).apply();
+        mPreferences.edit().commit();
+    }
+
+    public static boolean isUserLogged()
+    {
+        return mPreferences.contains(KEY_USER_LOGGED);
     }
 }
