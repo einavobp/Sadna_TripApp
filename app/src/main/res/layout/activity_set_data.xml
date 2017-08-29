@@ -5,7 +5,7 @@
     android:id="@+id/activity_set_data"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="proj.sadna.mta.sadna_2017.App.Activities.SetDataActivity">
+    tools:context="proj.sadna.mta.sadna_2017.app.Activities.SetDataActivity">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -17,13 +17,14 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.75"
-            android:background="@drawable/new_york_wp"
+            android:alpha="0.67"
+            android:background="@drawable/newyork_bg1"
             android:scaleType="fitCenter"/>
 
         <RelativeLayout
             android:layout_width="150dp"
             android:layout_height="40dp"
+
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
@@ -45,6 +46,7 @@
         android:id="@+id/preferences"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:layout_below="@id/header">
 
         <RelativeLayout

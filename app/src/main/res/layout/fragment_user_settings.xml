@@ -1,0 +1,191 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/header_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:alpha="0.9"
+        android:background="@color/apple">
+
+        <TextView
+            android:id="@+id/toolbar_site_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Settings"
+            android:textColor="@color/white"
+            android:textSize="26sp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_below="@id/header_toolbar">
+
+        <ImageView
+            android:id="@+id/_feedback_ic"
+            android:layout_width="13.3dp"
+            android:layout_height="20.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14.3dp"
+            android:src="@drawable/feedback_ic"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/_feedback_ic"
+            android:text="Contact us"
+            android:textColor="#111111"
+            android:textSize="17.18888sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/feedback"
+        android:background="#EDEDED"/>
+
+    <RelativeLayout
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_below="@id/feedback">
+
+        <ImageView
+            android:id="@+id/_profile_ic"
+            android:layout_width="18.0dp"
+            android:layout_height="18.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14.3dp"
+            android:src="@drawable/profile_ic"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/_profile_ic"
+            android:text="Profile"
+            android:textColor="#111111"
+            android:textSize="17.18888sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/profile"
+        android:background="#EDEDED"/>
+
+
+    <RelativeLayout
+        android:id="@+id/share"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_below="@id/profile">
+
+        <ImageView
+            android:id="@+id/_share"
+            android:layout_width="18.0dp"
+            android:layout_height="18.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14.3dp"
+            android:src="@drawable/share_ic_settings"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/_share"
+            android:text="Invite friends"
+            android:textColor="#111111"
+            android:textSize="17.18888sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/share"
+        android:background="#EDEDED"/>
+
+    <RelativeLayout
+        android:id="@+id/notification"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_below="@id/share">
+
+        <Switch
+            android:id="@+id/switch_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"/>
+        <!--  android:thumb="@drawable/customswitchselector"
+          android:track="@drawable/customtrack"/>-->
+
+        <ImageView
+            android:id="@+id/_notification"
+            android:layout_width="18.0dp"
+            android:layout_height="18.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14.3dp"
+            android:src="@drawable/notifications_ic_settings"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/_notification"
+            android:text="Notification"
+            android:textColor="#111111"
+            android:textSize="17.18888sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/notification"
+        android:background="#EDEDED"/>
+
+
+    <RelativeLayout
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_below="@id/notification">
+
+        <ImageView
+            android:id="@+id/_logout"
+            android:layout_width="18.0dp"
+            android:layout_height="18.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14.3dp"
+            android:src="@drawable/log_out_bt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9.0dp"
+            android:layout_toRightOf="@id/_logout"
+            android:text="Logout"
+            android:textColor="#111111"
+            android:textSize="17.18888sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@id/logout"
+        android:background="#EDEDED"/>
+</RelativeLayout>

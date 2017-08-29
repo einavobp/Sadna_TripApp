@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context="proj.sadna.mta.sadna_2017.App.Activities.SitesActivity">
+    tools:context="proj.sadna.mta.sadna_2017.app.Activities.SitesActivity">
 
     <RelativeLayout
         android:id="@+id/header_toolbar"

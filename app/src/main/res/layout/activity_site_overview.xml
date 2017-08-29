@@ -5,7 +5,7 @@
     android:id="@+id/activity_site_overview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="proj.sadna.mta.sadna_2017.App.Activities.SiteOverviewActivity">
+    tools:context="proj.sadna.mta.sadna_2017.app.Activities.SiteOverviewActivity">
 
     <RelativeLayout
         android:id="@+id/tabs_con"

@@ -5,6 +5,6 @@
         android:width="150dp"
         android:height="40dp"/>
     <corners android:radius="7dp"/>
-    <stroke android:color="@color/greyish" android:width="1dp"/>
-    <solid android:color="@color/CARIBBEAN"></solid>
+    <stroke android:color="@color/CARIBBEAN" android:width="1dp"/>
+    <solid android:color="@color/white"></solid>
 </shape>
