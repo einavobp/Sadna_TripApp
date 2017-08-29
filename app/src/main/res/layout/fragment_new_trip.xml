@@ -201,7 +201,7 @@
                     android:text="Guide me!"
                     android:textColor="@color/white"
                     android:textSize="17sp"
-                    fbutton:buttonColor="@color/fbutton_color_emerald"
+                    fbutton:buttonColor="@color/fbutton_color_peter_river"
                     fbutton:cornerRadius="5dp"
                     fbutton:shadowEnabled="true"
                     fbutton:shadowHeight="5dp"/>
