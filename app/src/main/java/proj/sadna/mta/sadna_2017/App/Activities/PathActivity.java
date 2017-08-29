@@ -29,6 +29,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
@@ -105,7 +106,7 @@ public class PathActivity extends AppCompatActivity
         mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener()
         {
             @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index)
+            public boolean onMenuItemClick(final int position, SwipeMenu menu, int index)
             {
                 SiteModel item = mAppList.get(position);
                 switch (index)
@@ -119,9 +120,19 @@ public class PathActivity extends AppCompatActivity
                         break;
                     case 1:
                         // delete
-//					delete(item);
-                        mAppList.remove(position);
-                        mAdapter.notifyDataSetChanged();
+
+                        SweetAlertDialog dialog = new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE).setTitleText("Are you sure?").setContentText("Won't be able to recover this file!").setConfirmText("Yes,delete it!").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+                        {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog)
+                            {
+                                mAppList.remove(position);
+                                mAdapter.notifyDataSetChanged();
+                                sDialog.setTitleText("Deleted!").setContentText("Your imaginary file has been deleted!").setConfirmText("OK").setConfirmClickListener(null).changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                            }
+                        });
+                        dialog.setCanceledOnTouchOutside(true);
+                        dialog.show();
                         break;
                 }
                 return false;

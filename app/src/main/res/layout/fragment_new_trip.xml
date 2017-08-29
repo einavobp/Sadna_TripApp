@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:fbutton="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -23,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.75"
-                android:background="@drawable/new_york_wp"
+                android:background="@drawable/newyork_bg1"
                 android:scaleType="fitCenter"/>
 
             <RelativeLayout
@@ -77,13 +78,14 @@
                     android:text="Session:"
                     android:textColor="@color/black"
                     android:textSize="17sp"/>
+
                 <Spinner
                     android:id="@+id/spinner1"
                     android:layout_width="130dp"
                     android:layout_height="40dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="22dp"
                     android:layout_toRightOf="@id/session"
-                    android:layout_centerVertical="true"
                     android:background="@drawable/spinnerbg"
                     android:spinnerMode="dialog"/>
             </RelativeLayout>
@@ -190,25 +192,22 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/hours_c">
 
-                <RelativeLayout
+                <info.hoang8f.widget.FButton
                     android:id="@+id/guideMe"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
                     android:layout_margin="25dp"
-                    android:background="@drawable/find_my_own">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Guide me!"
-                        android:textColor="@color/black"
-                        android:textSize="17sp"/>
-                </RelativeLayout>
+                    android:text="Guide me!"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    fbutton:buttonColor="@color/fbutton_color_emerald"
+                    fbutton:cornerRadius="5dp"
+                    fbutton:shadowEnabled="true"
+                    fbutton:shadowHeight="5dp"/>
 
             </RelativeLayout>
+
         </RelativeLayout>
     </RelativeLayout>
-
 </FrameLayout>

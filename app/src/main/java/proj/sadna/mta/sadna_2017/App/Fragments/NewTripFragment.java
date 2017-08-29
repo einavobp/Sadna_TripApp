@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import proj.sadna.mta.sadna_2017.app.Activities.PathActivity;
+import info.hoang8f.widget.FButton;
 import proj.sadna.mta.sadna_2017.R;
+import proj.sadna.mta.sadna_2017.app.Activities.PathActivity;
 
 public class NewTripFragment extends Fragment
 {
@@ -29,7 +29,7 @@ public class NewTripFragment extends Fragment
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_new_trip, container, false);
 
-        RelativeLayout guideMe = (RelativeLayout) view.findViewById(R.id.guideMe);
+        FButton guideMe = (FButton) view.findViewById(R.id.guideMe);
         guideMe.setOnClickListener(new View.OnClickListener()
         {
             @Override
