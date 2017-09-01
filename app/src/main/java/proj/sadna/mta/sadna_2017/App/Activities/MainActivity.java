@@ -15,14 +15,13 @@ import android.widget.TextView;
 import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 
 import java.util.ArrayList;
-
+import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Adapters.AppPagerAdapter;
 import proj.sadna.mta.sadna_2017.app.Fragments.MyPathsFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.NewTripFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.RecommendedPathFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.UserSettingsFragment;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
-import proj.sadna.mta.sadna_2017.R;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         mTabLayout.getTabAt(1).setCustomView(R.layout.ic_top);
         mTabLayout.getTabAt(2).setCustomView(R.layout.ic_mine);
         mTabLayout.getTabAt(3).setCustomView(R.layout.ic_settings);
-
 
         mPager.addOnPageChangeListener(mOnPageChangedListener);
 
@@ -183,6 +181,7 @@ public class MainActivity extends AppCompatActivity
         fragments.add(new RecommendedPathFragment());
         fragments.add(new MyPathsFragment());
         fragments.add(new UserSettingsFragment());
+
         return fragments;
     }
 
