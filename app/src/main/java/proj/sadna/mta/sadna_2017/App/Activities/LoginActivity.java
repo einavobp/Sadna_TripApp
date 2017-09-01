@@ -27,12 +27,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import proj.sadna.mta.sadna_2017.R;
+import proj.sadna.mta.sadna_2017.app.Network.NetworkManager;
+import proj.sadna.mta.sadna_2017.app.Network.Request.User;
+import proj.sadna.mta.sadna_2017.app.Network.Response.LoginResponse;
 import proj.sadna.mta.sadna_2017.app.TripAppPreferences;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -172,8 +179,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -201,17 +208,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         if (cancel)
         {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else
         {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            NetworkManager.getInstance().loginUser(new User("", email, password, TripAppPreferences.getInstance().getDeviceToken()), new Callback<LoginResponse>()
+            {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response)
+                {
+                    setDataToDB(response.body());
+                    showProgress(true);
+                    mAuthTask = new UserLoginTask(email, password);
+                    mAuthTask.execute((Void) null);
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t)
+                {
+                    Toast.makeText(LoginActivity.this, "Cant Login.", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }
+    }
+
+    private void setDataToDB(LoginResponse body)
+    {
+
+//        for (Cities city : body.cities)
+//        {
+//            city.save();
+//        }
+//        for (Sites site : body.sites)
+//        {
+//            site.save();
+//        }
+        TripAppPreferences.setCurrentUser(body.user);
     }
 
     private boolean isEmailValid(String email)

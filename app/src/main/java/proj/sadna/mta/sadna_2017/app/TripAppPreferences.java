@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import proj.sadna.mta.sadna_2017.app.Network.Response.UserBodyResponse;
+
 /**
  * Created by Einav on 26/08/2017.
  */
@@ -17,7 +19,7 @@ public class TripAppPreferences
     private static TripAppPreferences instance = new TripAppPreferences();
     private static final String KEY_FACEBOOK_ID = "facebook_id";
     private static final String KEY_GET_NOTIFICATION = "get_notification";
-
+    private static final String DEVICE_TOKEN = "device_token";
     private static final String defValue = "";
     private static final String KEY_USER_URL = "profile_pic_android";
     private static final String KEY_USER_DESCRIPTION = "description";
@@ -70,9 +72,9 @@ public class TripAppPreferences
         return mPreferences.getInt(KEY_USER_ID, -1);
     }
 
-    public static void saveUserId(int id)
+    public static void saveUserId(long id)
     {
-        mPreferences.edit().putInt(KEY_USER_ID, id).apply();
+        mPreferences.edit().putLong(KEY_USER_ID, id).apply();
     }
 
     public static String getAndroidProfilePic()
@@ -105,6 +107,15 @@ public class TripAppPreferences
         return true;
     }
 
+    public void setDeviceToken(String deviceToken)
+    {
+        mPreferences.edit().putString(DEVICE_TOKEN, deviceToken).apply();
+    }
+
+    public String getDeviceToken()
+    {
+        return mPreferences.getString(DEVICE_TOKEN, "");
+    }
 
     public static void saveFCMToken(String refreshedToken)
     {
@@ -159,5 +170,10 @@ public class TripAppPreferences
     public static boolean isUserLogged()
     {
         return mPreferences.contains(KEY_USER_LOGGED);
+    }
+
+    public static void setCurrentUser(UserBodyResponse user)
+    {
+        saveUserId(user.userId);
     }
 }

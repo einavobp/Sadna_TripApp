@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:fbutton="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -104,18 +105,31 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
+                <info.hoang8f.widget.FButton
                     android:id="@+id/email_sign_in_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@color/blueText"
                     android:text="Login"
                     android:textColor="@color/white"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    fbutton:buttonColor="@color/fbutton_color_belize_hole"
+                    fbutton:shadowColor="@color/grey"/>
 
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/skip_login"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Skip Login and use local mode"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    fbutton:buttonColor="@color/fbutton_color_pomegranate"
+                    fbutton:shadowColor="@color/grey"/>
             </LinearLayout>
+
         </ScrollView>
     </RelativeLayout>
 </RelativeLayout>
