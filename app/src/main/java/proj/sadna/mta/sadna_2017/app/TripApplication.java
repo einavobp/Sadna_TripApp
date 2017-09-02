@@ -3,6 +3,7 @@ package proj.sadna.mta.sadna_2017.app;
 import android.provider.Settings;
 
 import com.orm.SugarApp;
+import com.orm.SugarDb;
 
 import proj.sadna.mta.sadna_2017.app.Utils.Utils;
 
@@ -17,10 +18,13 @@ public class TripApplication extends SugarApp
     {
         super.onCreate();
         //get data from server
-
+        SugarDb db = new SugarDb(this);
+        db.onCreate(db.getDB());
         //configure if new user or returns
         Utils.init(this);
         TripAppPreferences.init(this);
+
+
         String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         TripAppPreferences.getInstance().setDeviceToken(android_id);
     }

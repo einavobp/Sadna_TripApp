@@ -85,7 +85,7 @@ public class SiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(mImg);
 
             name.setText(siteModel.getShortName());
-            description.setText(siteModel.getDescription());
+            description.setText(siteModel.getShortDescription());
 
             click.setOnClickListener(new View.OnClickListener()
             {

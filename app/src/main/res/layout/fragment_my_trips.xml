@@ -13,29 +13,14 @@
         android:layout_alignParentTop="true"
         android:background="@color/light_blue">
 
-        <ImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/share"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="My Trips"
             android:textColor="@color/white"
-            android:textSize="26sp"/>
+            android:textSize="22sp"/>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/back"/>
     </RelativeLayout>
 
     <com.baoyz.swipemenulistview.SwipeMenuListView

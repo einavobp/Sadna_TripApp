@@ -16,8 +16,8 @@ public class LoginResponse
     @SerializedName("cities")
     public ArrayList<Cities> cities;
 
-//    @SerializedName("sites")
-//    public List<Sites> sites;
+    @SerializedName("sites")
+    public List<Sites> sites;
 
 //    @SerializedName("recommended_paths")
     public List<RecommendedPathsResponse> openingTimesResponse;

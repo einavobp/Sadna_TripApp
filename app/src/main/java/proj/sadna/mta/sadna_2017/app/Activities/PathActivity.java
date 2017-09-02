@@ -48,6 +48,14 @@ public class PathActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_path);
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                onBackPressed();
+            }
+        });
         mMap = (ImageView) findViewById(R.id.map);
         mMap.setOnClickListener(new View.OnClickListener()
         {
@@ -214,17 +222,49 @@ public class PathActivity extends AppCompatActivity
         site.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
                 "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
                 "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
+        SiteModel site2 = new SiteModel();
+        site2.setFullName("Site 2");
+        site2.setShortName("Museum of Art");
+        site2.setAddress("11 W 53rd St, New York");
+        site2.setPhoneNumber("(718) 670-7780");
+        site2.setProfilePicture("https://www.discoverlongisland.com/wp-content/uploads/2015/08/The-Hamptons-Long-Island-New-York.jpg");
+        site2.setLat(40.7614327);
+        site2.setLng(-73.97762159999999);
+        site2.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
+                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
+                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
+
+        SiteModel site3 = new SiteModel();
+        site3.setFullName("Lego World");
+        site3.setShortName("Lego World");
+        site3.setAddress("11 W 53rd St, New York");
+        site3.setPhoneNumber("(718) 670-7780");
+        site3.setProfilePicture("http://www.sammyandthecity.com/wp-content/uploads/2011/05/IMG_1183.jpg");
+        site3.setLat(40.7614327);
+        site3.setLng(-73.97762159999999);
+        site3.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
+                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
+                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
+
+        SiteModel site4 = new SiteModel();
+        site4.setFullName("The Museum of Modern Art");
+        site4.setShortName("Museum of Art");
+        site4.setAddress("11 W 53rd St, New York");
+        site4.setPhoneNumber("(718) 670-7780");
+        site4.setProfilePicture("https://www.moma.org/assets/visit/entrance-image--museum-crop-8bd4aeaea6c59781790dacfc1346e2d3.jpg");
+        site4.setLat(40.7614327);
+        site4.setLng(-73.97762159999999);
+        site4.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
+                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
+                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
 
         List<SiteModel> sites = new ArrayList<>();
         for (int i = 0; i < 5; i++)
         {
-            if (i == 1)
-                site.setProfilePicture("https://www.rd.com/wp-content/uploads/sites/2/2016/01/01-statue-of-liberty-facts.jpg");
-            if (i == 2)
-                site.setProfilePicture("http://vignette4.wikia.nocookie.net/penguinsofmadagascar/images/b/bc/Central_Park_Zoo.png/revision/latest?cb=20131120080856");
-            if (i == 3)
-                site.setProfilePicture("http://www.freetoursbyfoot.com/wp-content/uploads/2013/02/New-York-Food-Tours.jpg");
-            sites.add(site);
+            if (i == 1) sites.add(site);
+            if (i == 2) sites.add(site2);
+            if (i == 3) sites.add(site3);
+
         }
         return sites;
     }

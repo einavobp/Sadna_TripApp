@@ -1,12 +1,11 @@
 package proj.sadna.mta.sadna_2017.app.Network.Response;
 
 import com.google.gson.annotations.SerializedName;
-import com.orm.SugarRecord;
 
 /**
  * Created by Einav on 01/09/2017.
  */
-public class Sites extends SugarRecord
+public class Sites
 {
     @SerializedName("place_id")
     public String place_id;

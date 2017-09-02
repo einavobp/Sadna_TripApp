@@ -26,13 +26,17 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import proj.sadna.mta.sadna_2017.R;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.app.Network.NetworkManager;
 import proj.sadna.mta.sadna_2017.app.Network.Request.User;
 import proj.sadna.mta.sadna_2017.app.Network.Response.LoginResponse;
@@ -69,6 +73,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private RelativeLayout loginContainer;
+    private RelativeLayout loadder;
+    private AVLoadingIndicatorView avi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -106,6 +113,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        loginContainer = (RelativeLayout) findViewById(R.id.login_email);
+        loadder = (RelativeLayout) findViewById(R.id.loadder);
+        avi = (AVLoadingIndicatorView) findViewById(R.id.avloadingIndicatorView);
+    }
+
+    void startAnim()
+    {
+        //avi.show();
+        avi.setVisibility(View.VISIBLE);
+    }
+
+    void stopAnim()
+    {
+        //avi.hide();
+        avi.setVisibility(View.GONE);
     }
 
     private void populateAutoComplete()
@@ -211,15 +233,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView.requestFocus();
         } else
         {
+
+            loginContainer.setVisibility(View.GONE);
+            loadder.setVisibility(View.VISIBLE);
+            startAnim();
             NetworkManager.getInstance().loginUser(new User("", email, password, TripAppPreferences.getInstance().getDeviceToken()), new Callback<LoginResponse>()
             {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response)
                 {
+                    stopAnim();
                     setDataToDB(response.body());
                     showProgress(true);
-                    mAuthTask = new UserLoginTask(email, password);
-                    mAuthTask.execute((Void) null);
+                    TripAppPreferences.setUserLogged(true);
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    LoginActivity.this.finish();
+
                 }
 
                 @Override
@@ -235,15 +264,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void setDataToDB(LoginResponse body)
     {
-
-//        for (Cities city : body.cities)
-//        {
-//            city.save();
-//        }
-//        for (Sites site : body.sites)
-//        {
-//            site.save();
-//        }
+        SiteModel.saveList(body.sites);
         TripAppPreferences.setCurrentUser(body.user);
     }
 

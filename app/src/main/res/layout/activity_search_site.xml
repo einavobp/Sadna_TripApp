@@ -259,6 +259,13 @@
         </RelativeLayout>
     </RelativeLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sites_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/filter_sort_cntr"
+        android:layout_marginTop="5dp"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_search"
         android:layout_width="60dp"
@@ -268,13 +275,8 @@
         android:layout_margin="18dp"
         android:backgroundTint="@color/primary_dark"
         android:scaleType="fitCenter"
+        android:visibility="gone"
         android:src="@drawable/search"
         app:fabSize="normal"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/sites_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/filter_sort_cntr"
-        android:layout_marginTop="5dp"/>
 </RelativeLayout>

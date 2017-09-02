@@ -22,7 +22,7 @@
         tools:replace="android:label,android:icon">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB0i0HMagS-phsi28t5E9MF5CrgfBOgWPg"/>
+            android:value="AIzaSyDmb9WuaYVvq3njzHXigDwJIFO8BV-lcxA"/>
         <meta-data
             android:name="DATABASE"
             android:value="trips.db"/>
@@ -32,9 +32,9 @@
         <meta-data
             android:name="QUERY_LOG"
             android:value="true"/>
-        <meta-data
-            android:name="DOMAIN_PACKAGE_NAME"
-            android:value="proj.sadna.mta.sadna_2017.App.Models"/>
+        <!--<meta-data-->
+            <!--android:name="DOMAIN_PACKAGE_NAME"-->
+            <!--android:value="proj.sadna.mta.sadna_2017.App.Models"/>-->
 
         <activity android:name=".app.Activities.MainActivity">
         </activity>
@@ -57,6 +57,9 @@
         <activity
             android:name=".app.Activities.SearchSiteActivity"
             android:label="@string/title_activity_search_site">
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyB4SXAzr--5Z9ZgQqOXoGAHnBu-n-CDoN8"/>
         </activity>
         <activity
             android:name=".app.Activities.PathOnMapActivity"

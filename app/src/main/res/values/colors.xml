@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="apple">#5988a2</color>
-    <color name="colorPrimary">#5988a2</color>
+    <color name="colorPrimary">#3eadeb</color>
+    <!--<color name="colorPrimary">#5988a2</color>-->
     <color name="colorPrimaryLight">#7099a2</color>
     <color name="colorPrimaryDark">#5988a2</color>
-    <color name="colorAccent">#5988a2</color>
+    <color name="colorAccent">#0097A7</color>
     <color name="CARIBBEAN">#12C39A</color>
     <color name="pale">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="light_blue">#5988a2</color>
+    <color name="light_blue">#3498db</color>
+    <!--<color name="light_blue">#5988a2</color>-->
     <color name="primary">#00BCD4</color>
     <color name="primary_dark">#0097A7</color>
     <color name="primary_light">#B2EBF2</color>
