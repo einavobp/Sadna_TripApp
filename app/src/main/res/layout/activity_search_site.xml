@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,79 +31,16 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/back"/>
 
-        <RelativeLayout
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp">
-
-            <ImageView
-                android:id="@+id/done"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:src="@drawable/done"/>
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/done"
-                android:layout_centerVertical="true"
-                android:text="Done"
-                android:textColor="@color/pale"
-                android:textSize="14sp"/>
-        </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/search_container"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@id/header_toolbar">
-
-        <ImageView
-            android:id="@+id/search_ic"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/search_dark"
-
-            />
-
-        <EditText
-            android:id="@+id/search_text"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:background="@drawable/border_line"
-            android:hint="Search Site"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="17sp"/>
-    </RelativeLayout>
-
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/sites_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/search_container"
-        android:layout_marginTop="5dp">
-
-    </android.support.v7.widget.RecyclerView>
 
     <RelativeLayout
         android:id="@+id/filter_sort_cntr"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/header_toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/filter_btn">
 
         <RelativeLayout
@@ -117,6 +55,7 @@
             android:layout_width="95dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true">
+
             <ImageView
                 android:id="@+id/filter_ic"
                 android:layout_width="20dp"
@@ -136,6 +75,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"/>
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/sort_btn"
@@ -157,8 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/sort_ic"
                 android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/sort_ic"
                 android:text="Sort"
                 android:textColor="@color/black"
                 android:textSize="18sp"/>
@@ -319,4 +259,22 @@
         </RelativeLayout>
     </RelativeLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_search"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="18dp"
+        android:backgroundTint="@color/primary_dark"
+        android:scaleType="fitCenter"
+        android:src="@drawable/search"
+        app:fabSize="normal"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sites_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/filter_sort_cntr"
+        android:layout_marginTop="5dp"/>
 </RelativeLayout>

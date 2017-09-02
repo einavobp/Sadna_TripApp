@@ -37,6 +37,7 @@ import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 public class PathActivity extends AppCompatActivity
 {
 
+    private static final int PATH_SIZE = 5;
     private List<SiteModel> mAppList;
     private AppAdapter mAdapter;
     private SwipeMenuListView mListView;
@@ -128,6 +129,19 @@ public class PathActivity extends AppCompatActivity
                             {
                                 mAppList.remove(position);
                                 mAdapter.notifyDataSetChanged();
+                                if (mAppList.size() < PATH_SIZE)
+                                {
+                                    findViewById(R.id.add_site).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.add_site).setOnClickListener(new View.OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(View view)
+                                        {
+                                            PathActivity.this.startActivity(new Intent(PathActivity.this, SearchSiteActivity.class));
+                                        }
+                                    });
+                                }
+
                                 sDialog.setTitleText("Deleted!").setContentText("Your imaginary file has been deleted!").setConfirmText("OK").setConfirmClickListener(null).changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                             }
                         });
