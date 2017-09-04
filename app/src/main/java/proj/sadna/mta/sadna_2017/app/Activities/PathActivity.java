@@ -28,6 +28,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import proj.sadna.mta.sadna_2017.R;
@@ -38,7 +39,7 @@ public class PathActivity extends AppCompatActivity
 {
 
     private static final int PATH_SIZE = 5;
-    private List<SiteModel> mAppList;
+    private List<SiteModel> mAppList = new ArrayList<>();
     private AppAdapter mAdapter;
     private SwipeMenuListView mListView;
     private ImageView mMap;
@@ -211,59 +212,12 @@ public class PathActivity extends AppCompatActivity
 
     private List<SiteModel> getSitesFromServer()
     {
-        SiteModel site = new SiteModel();
-        site.setFullName("The Museum of Modern Art");
-        site.setShortName("Museum of Art");
-        site.setAddress("11 W 53rd St, New York");
-        site.setPhoneNumber("(718) 670-7780");
-        site.setProfilePicture("https://www.moma.org/assets/visit/entrance-image--museum-crop-8bd4aeaea6c59781790dacfc1346e2d3.jpg");
-        site.setLat(40.7614327);
-        site.setLng(-73.97762159999999);
-        site.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
-                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
-                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
-        SiteModel site2 = new SiteModel();
-        site2.setFullName("Site 2");
-        site2.setShortName("Museum of Art");
-        site2.setAddress("11 W 53rd St, New York");
-        site2.setPhoneNumber("(718) 670-7780");
-        site2.setProfilePicture("https://www.discoverlongisland.com/wp-content/uploads/2015/08/The-Hamptons-Long-Island-New-York.jpg");
-        site2.setLat(40.7614327);
-        site2.setLng(-73.97762159999999);
-        site2.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
-                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
-                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
-
-        SiteModel site3 = new SiteModel();
-        site3.setFullName("Lego World");
-        site3.setShortName("Lego World");
-        site3.setAddress("11 W 53rd St, New York");
-        site3.setPhoneNumber("(718) 670-7780");
-        site3.setProfilePicture("http://www.sammyandthecity.com/wp-content/uploads/2011/05/IMG_1183.jpg");
-        site3.setLat(40.7614327);
-        site3.setLng(-73.97762159999999);
-        site3.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
-                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
-                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
-
-        SiteModel site4 = new SiteModel();
-        site4.setFullName("The Museum of Modern Art");
-        site4.setShortName("Museum of Art");
-        site4.setAddress("11 W 53rd St, New York");
-        site4.setPhoneNumber("(718) 670-7780");
-        site4.setProfilePicture("https://www.moma.org/assets/visit/entrance-image--museum-crop-8bd4aeaea6c59781790dacfc1346e2d3.jpg");
-        site4.setLat(40.7614327);
-        site4.setLng(-73.97762159999999);
-        site4.setDescription("The Museum of Modern Art (MoMA /ˈmoʊmə/) is an art museum located in Midtown Manhattan in New York City, on 53rd Street between Fifth and Sixth Avenues.\n" +
-                "MoMA has been important in developing and collecting modernist art, and is often identified as one of the largest and most influential museums of modern art in the world. MoMA's collection offers an overview of modern and contemporary art, including works of architecture and design, drawing, painting, sculpture, photography, prints, illustrated books and artist's books, film, and electronic media.\n" +
-                "The MoMA Library includes approximately 300,000 books and exhibition catalogs, over 1,000 periodical titles, and over 40,000 files of ephemera about individual artists and groups. The archives holds primary source material related to the history of modern and contemporary art.");
-
         List<SiteModel> sites = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
+
+        for (int i = 1; i <= 5; i++)
         {
-            if (i == 1) sites.add(site);
-            if (i == 2) sites.add(site2);
-            if (i == 3) sites.add(site3);
+            sites.add(SiteModel.findById(SiteModel.class,i));
+            mAppList.add(SiteModel.findById(SiteModel.class,i));
 
         }
         return sites;
@@ -326,7 +280,7 @@ public class PathActivity extends AppCompatActivity
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent)
+        public View getView(final int position, View convertView, ViewGroup parent)
         {
             if (convertView == null)
             {
@@ -346,7 +300,9 @@ public class PathActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    PathActivity.this.startActivity(new Intent(PathActivity.this, SiteOverviewActivity.class));
+                    Intent intent = new Intent(PathActivity.this, SiteOverviewActivity.class);
+                    intent.putExtra("id",mAppList.get(position).getId());
+                    PathActivity.this.startActivity(intent);
                 }
             });
             holder.siteName.setOnClickListener(new View.OnClickListener()
@@ -354,7 +310,9 @@ public class PathActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    PathActivity.this.startActivity(new Intent(PathActivity.this, SiteOverviewActivity.class));
+                    Intent intent = new Intent(PathActivity.this, SiteOverviewActivity.class);
+                    intent.putExtra("id",mAppList.get(position).getId());
+                    PathActivity.this.startActivity(intent);
                 }
             });
             return convertView;
@@ -387,6 +345,8 @@ public class PathActivity extends AppCompatActivity
             return true;
         }
     }
+
+
 
     private int dp2px(int dp)
     {

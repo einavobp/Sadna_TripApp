@@ -15,6 +15,10 @@ public interface TripApi
 
     @POST(ApiConstants.LOGIN_USER)
     Call<LoginResponse> loginUser(@Body User user);
+
+
+    @POST(ApiConstants.CALCULATE)
+    Call<LoginResponse> calculatePath(@Body User user);
 //
 //    @FormUrlEncoded
 //    @POST(ApiConstants.GET_USER)

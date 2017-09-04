@@ -1,5 +1,6 @@
 package proj.sadna.mta.sadna_2017.app.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import java.util.Arrays;
 import java.util.List;
 
+import proj.sadna.mta.sadna_2017.app.Activities.PathActivity;
 import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
 import proj.sadna.mta.sadna_2017.app.Models.PathModel;
 import proj.sadna.mta.sadna_2017.R;
@@ -30,7 +32,7 @@ public class TopTripsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {// Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_trips, container, false);
         mListView = (SwipeMenuListView) view.findViewById(R.id.top_trips_lv);
-        mAdapter = new TopTripsAdapter(Arrays.asList(new PathModel("Shani", 1), new PathModel("Gil", 3), new PathModel("Liron", 2)));
+        mAdapter = new TopTripsAdapter(Arrays.asList(new PathModel("st Path", 1), new PathModel("Second Path", 3), new PathModel("Third Path", 2)));
         mListView.setAdapter(this.mAdapter);
         return view;
     }
@@ -86,6 +88,15 @@ public class TopTripsFragment extends Fragment {
             this.secondStar = (ImageView) view.findViewById(R.id.black_star_2);
             this.thirdStar = (ImageView) view.findViewById(R.id.black_star_3);
             view.setTag(this);
+            view.findViewById(R.id.rel).setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    Intent intent = new Intent(getActivity(), PathActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
         public void setText(String text) {
