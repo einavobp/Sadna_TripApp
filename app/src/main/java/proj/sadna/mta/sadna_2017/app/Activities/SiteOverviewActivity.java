@@ -209,7 +209,7 @@ public class SiteOverviewActivity extends AppCompatActivity
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(InfoFragment.newInstance(site));
         fragments.add(OpeningHourFragment.newInstance());
-        fragments.add(GalleryFragment.newInstance(this));
+        fragments.add(GalleryFragment.newInstance(this,site));
         fragments.add(NavigationFragment.newInstance(site));
         return fragments;
     }

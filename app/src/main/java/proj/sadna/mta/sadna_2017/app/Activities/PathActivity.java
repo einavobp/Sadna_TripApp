@@ -62,7 +62,9 @@ public class PathActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                PathActivity.this.startActivity(new Intent(PathActivity.this, PathOnMapActivity.class));
+                Intent intent = new Intent(PathActivity.this, PathOnMapActivity.class);
+                intent.putExtra("ids", getPathStringArray());
+                PathActivity.this.startActivity(intent);
             }
         });
         mAppList = getSitesFromServer();
@@ -206,6 +208,17 @@ public class PathActivity extends AppCompatActivity
                 return false;
             }
         });
+
+    }
+
+    private String getPathStringArray()
+    {
+        String ids = new String();
+        for (SiteModel siteModel : mAppList)
+        {
+            ids = ids + siteModel.getId() + ",";
+        }
+        return ids;
 
     }
 

@@ -26,8 +26,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import proj.sadna.mta.sadna_2017.R;
+import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 
 import static proj.sadna.mta.sadna_2017.app.Utils.AppConstants.REQUEST_LOCATION;
 
@@ -36,13 +38,31 @@ public class PathOnMapActivity extends AppCompatActivity implements RoutingListe
     private static final int[] COLORS = new int[]{R.color.primary_dark, R.color.primary, R.color.primary_light, R.color.accent, R.color.primary_dark_material_light};
     MapView mMapView;
     private GoogleMap googleMap;
+    private String[] ids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_path_on_map);
+        final List<SiteModel> siteModels = new ArrayList<>();
+        if (getIntent().hasExtra("ids"))
+        {
+            ids = getIntent().getStringExtra("ids").split(",");
+            for (String id : ids)
+            {
+                try
+                {
+                    long siteID = Long.parseLong(id);
+                    siteModels.add(SiteModel.findById(SiteModel.class, siteID));
 
+                } catch (Exception e)
+                {
+                    Log.d("ex", e.getMessage());
+                }
+            }
+
+        }
         mMapView = (MapView) findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume(); // needed to get the map to display immediately
@@ -75,16 +95,19 @@ public class PathOnMapActivity extends AppCompatActivity implements RoutingListe
 
                 // For dropping a marker at a point on the Map
                 LatLng loc = new LatLng(40.731640, -73.996985);
-                LatLng loc2 = new LatLng(40.724612, -74.002543);
-                LatLng loc3 = new LatLng(40.706080, -73.996889);
+//                LatLng loc2 = new LatLng(40.724612, -74.002543);
+//                LatLng loc3 = new LatLng(40.706080, -73.996889);
+                List<LatLng> latLngs = new ArrayList<LatLng>();
+                for (SiteModel site : siteModels)
+                {
+                    loc = new LatLng(site.getLat(), site.getLng());
+                    latLngs.add(loc);
+                    googleMap.addMarker(new MarkerOptions().position(loc).title(site.getFullName()));
+                }
 
                 BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-                Routing routing = new Routing.Builder().travelMode(AbstractRouting.TravelMode.DRIVING).withListener(PathOnMapActivity.this).alternativeRoutes(true).waypoints(loc, loc2, loc3).build();
+                Routing routing = new Routing.Builder().travelMode(AbstractRouting.TravelMode.DRIVING).withListener(PathOnMapActivity.this).alternativeRoutes(true).waypoints().build();
                 routing.execute();
-
-                googleMap.addMarker(new MarkerOptions().position(loc).title("5th Avenue").icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue)));
-                googleMap.addMarker(new MarkerOptions().position(loc2).title("Soho").icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue)));
-                googleMap.addMarker(new MarkerOptions().position(loc3).title("Brooklyn bride").icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue)));
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(loc).zoom(12).build();
