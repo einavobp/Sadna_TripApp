@@ -19,8 +19,8 @@ public class LoginResponse
     @SerializedName("sites")
     public List<Sites> sites;
 
-//    @SerializedName("recommended_paths")
-    public List<RecommendedPathsResponse> openingTimesResponse;
+    @SerializedName("recommanded_routes")
+    public List<RecommendedPathsResponse> recommanded_routes;
 
 }
 

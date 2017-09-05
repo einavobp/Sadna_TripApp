@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/add_btn"
             android:layout_width="35dp"
             android:layout_height="35dp"

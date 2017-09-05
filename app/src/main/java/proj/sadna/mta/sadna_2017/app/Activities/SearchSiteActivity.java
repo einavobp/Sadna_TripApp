@@ -23,7 +23,9 @@ public class SearchSiteActivity extends AppCompatActivity
 {
     public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 100;
     private static final String TAG = "TAG";
+    public static boolean changed = false;
     private PathModel pathModel = new PathModel();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,10 +68,22 @@ public class SearchSiteActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBackPressed()
+    {
+        setResult(144);
+        finish();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         try
         {
+            if (resultCode == 123)
+            {
+                this.setResult(123);
+                this.finish();
+            }
             if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE)
             {
                 if (resultCode == RESULT_OK)

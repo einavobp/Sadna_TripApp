@@ -53,6 +53,7 @@ public class PathModel extends SugarRecord
     {
         ArrayList<SiteModel> sites = new ArrayList<>();
         String[] ids_ = ids.split(",");
+        size_ids = ids_.length;
         for (int i = 0; i < size_ids; i++)
         {
             sites.add(SiteModel.findById(SiteModel.class, Long.parseLong(ids_[i])));
@@ -87,16 +88,16 @@ public class PathModel extends SugarRecord
 
     public void removeSite(SiteModel siteModel)
     {
-        for (String o : ids.split(","))
+        String[] strings = ids.split(",");
+        String ids_ = new String();
+        for (String o : strings)
         {
-            String ids_ = new String();
             if (Long.parseLong(o) != siteModel.getId())
             {
                 ids_ = ids_ + o + ",";
             }
             this.ids = ids_;
         }
-        size_ids--;
         this.save();
     }
 
@@ -108,6 +109,7 @@ public class PathModel extends SugarRecord
     public void setIds(String ids)
     {
         this.ids = ids;
+
     }
 
     public int getSize_ids()
@@ -124,7 +126,7 @@ public class PathModel extends SugarRecord
     {
         PathModel pathModel = PathModel.findById(PathModel.class, id);
         pathModel.ids = pathModel.ids + id1 + ",";
-        pathModel.size_ids++;
         pathModel.save();
     }
+
 }

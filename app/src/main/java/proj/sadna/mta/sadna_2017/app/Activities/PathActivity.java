@@ -33,6 +33,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
 import proj.sadna.mta.sadna_2017.app.Models.PathModel;
+import proj.sadna.mta.sadna_2017.app.Models.PathModelRec;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 
 public class PathActivity extends AppCompatActivity
@@ -44,6 +45,29 @@ public class PathActivity extends AppCompatActivity
     private SwipeMenuListView mListView;
     private ImageView mMap;
     private PathModel pathModel = null;
+    private PathModelRec pathModelRec = null;
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == 123 || resultCode == 144)
+        {
+            pathModel = PathModel.findById(PathModel.class, pathModel.getId());
+            mAppList = pathModel.getSiteModels();
+            if (mAppList.size() == 5) findViewById(R.id.add_site).setVisibility(View.INVISIBLE);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        setResult(144);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,7 +90,7 @@ public class PathActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(PathActivity.this, PathOnMapActivity.class);
                 intent.putExtra("ids", getPathStringArray());
-                PathActivity.this.startActivity(intent);
+                PathActivity.this.startActivityForResult(intent, 111);
             }
         });
         mAppList = getSitesFromServer();
@@ -153,7 +177,7 @@ public class PathActivity extends AppCompatActivity
                                         {
                                             Intent intent = new Intent(PathActivity.this, SearchSiteActivity.class);
                                             intent.putExtra("id", pathModel.getId());
-                                            PathActivity.this.startActivityForResult(intent,111);
+                                            PathActivity.this.startActivityForResult(intent, 111);
                                         }
                                     });
                                 }
@@ -230,7 +254,20 @@ public class PathActivity extends AppCompatActivity
 
     private List<SiteModel> getSitesFromServer()
     {
-        if (getIntent().hasExtra("id"))
+        if (getIntent().hasExtra("rec_id"))
+        {
+            long id = getIntent().getLongExtra("rec_id", 0);
+            pathModelRec = PathModelRec.findById(PathModelRec.class, id);
+
+            if (pathModelRec != null)
+            {
+                pathModel = new PathModel(pathModelRec.getName(), pathModelRec.getRate());
+                pathModel.setIds(pathModelRec.getIds());
+                pathModel.save();
+
+                return (pathModel.getSiteModels());
+            }
+        } else if (getIntent().hasExtra("id"))
         {
             long id = getIntent().getLongExtra("id", 0);
             pathModel = PathModel.findById(PathModel.class, id);
@@ -239,9 +276,11 @@ public class PathActivity extends AppCompatActivity
 
         List<SiteModel> sites = new ArrayList<>();
         for (int i = 1; i < 6; i++)
+
         {
             sites.add(SiteModel.findById(SiteModel.class, i));
         }
+
         return sites;
     }
 
@@ -362,6 +401,7 @@ public class PathActivity extends AppCompatActivity
             }
             return true;
         }
+
     }
 
     private int dp2px(int dp)

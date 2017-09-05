@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import proj.sadna.mta.sadna_2017.R;
+import proj.sadna.mta.sadna_2017.app.Models.PathModelRec;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 import proj.sadna.mta.sadna_2017.app.Network.NetworkManager;
 import proj.sadna.mta.sadna_2017.app.Network.Request.User;
@@ -265,6 +266,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void setDataToDB(LoginResponse body)
     {
         SiteModel.saveList(body.sites);
+        PathModelRec.saveList(body.recommanded_routes);
         TripAppPreferences.setCurrentUser(body.user);
     }
 

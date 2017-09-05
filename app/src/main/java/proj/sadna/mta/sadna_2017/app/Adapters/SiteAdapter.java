@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -29,7 +28,7 @@ import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 public class SiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     Context context;
-    SearchSiteActivity searchSiteActivity = null;
+    public static SearchSiteActivity searchSiteActivity = null;
     static PathModel _path = null;
     ArrayList<SiteModel> data = new ArrayList<>();
 
@@ -102,23 +101,23 @@ public class SiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             name.setText(siteModel.getShortName());
             description.setText(siteModel.getShortDescription());
 
-            addBtn.setOnClickListener(new View.OnClickListener()
-                                      {
-                                          @Override
-                                          public void onClick(View view)
-                                          {
-                                              if (_path.getSize_ids() < 5)
-                                              {
-                                                  PathModel.addSite(_path.getId(), siteModel.getId());
-                                                  _path.save();
-                                              } else
-                                              {
-                                                  Toast.makeText(context, "5 Sites at top!", Toast.LENGTH_LONG).show();
-                                              }
-                                          }
-                                      }
-
-            );
+//            addBtn.setOnClickListener(new View.OnClickListener()
+//                                      {
+//                                          @Override
+//                                          public void onClick(View view)
+//                                          {
+//                                              if (_path.getSize_ids() < 5)
+//                                              {
+//                                                  PathModel.addSite(_path.getId(), siteModel.getId());
+//                                                  _path.save();
+//                                              } else
+//                                              {
+//                                                  Toast.makeText(context, "5 Sites at top!", Toast.LENGTH_LONG).show();
+//                                              }
+//                                          }
+//                                      }
+//
+//            );
             click.setOnClickListener(new View.OnClickListener()
 
                                      {
@@ -126,6 +125,8 @@ public class SiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                                          public void onClick(View view)
                                          {
                                              Intent intent = new Intent(context, SiteOverviewActivity.class);
+                                             intent.putExtra("id", siteModel.getId());
+                                             intent.putExtra("path_id", _path.getId());
                                              context.startActivity(intent);
                                          }
                                      }
