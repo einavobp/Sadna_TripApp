@@ -10,10 +10,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import info.hoang8f.widget.FButton;
 import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Activities.PathActivity;
+import proj.sadna.mta.sadna_2017.app.Models.PathModel;
+import proj.sadna.mta.sadna_2017.app.Network.NetworkManager;
+import proj.sadna.mta.sadna_2017.app.Network.Request.RouteRequest;
+import proj.sadna.mta.sadna_2017.app.Network.Response.RouteResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewTripFragment extends Fragment
 {
@@ -35,8 +43,29 @@ public class NewTripFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(), PathActivity.class);
-                startActivity(intent);
+
+                NetworkManager.getInstance().calculate(new RouteRequest("1", "1", "2", "8:00", "18:00"), new Callback<RouteResponse>()
+                {
+                    @Override
+                    public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response)
+                    {
+                        PathModel pathModel = new PathModel("My Path", 0, response.body().sites);
+                        pathModel.save();
+
+
+                        Intent intent = new Intent(getActivity(), PathActivity.class);
+                        intent.putExtra("id", pathModel.getId());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<RouteResponse> call, Throwable t)
+                    {
+                        Toast.makeText(getActivity(), "Server Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         });
 

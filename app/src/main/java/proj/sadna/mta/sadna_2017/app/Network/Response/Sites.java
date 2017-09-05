@@ -25,8 +25,6 @@ public class Sites
     @SerializedName("rating")
     public double rating;
 
-    @SerializedName("google_id")
-    public String google_id;
 
     @SerializedName("location_lat")
     public double location_lat;
@@ -57,4 +55,5 @@ public class Sites
 
     @SerializedName("compositions")
     public String compositions;
+
 }

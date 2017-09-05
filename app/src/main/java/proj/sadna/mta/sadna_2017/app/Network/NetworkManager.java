@@ -2,8 +2,10 @@ package proj.sadna.mta.sadna_2017.app.Network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import proj.sadna.mta.sadna_2017.app.Network.Request.RouteRequest;
 import proj.sadna.mta.sadna_2017.app.Network.Request.User;
 import proj.sadna.mta.sadna_2017.app.Network.Response.LoginResponse;
+import proj.sadna.mta.sadna_2017.app.Network.Response.RouteResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -60,6 +62,12 @@ public class NetworkManager
     public void loginUser(User user, Callback<LoginResponse> callback)
     {
         Call<LoginResponse> call = api.loginUser(user);
+        call.enqueue(callback);
+    }
+
+    public void calculate(RouteRequest route, Callback<RouteResponse> callback)
+    {
+        Call<RouteResponse> call = api.calculateRoute(route);
         call.enqueue(callback);
     }
 

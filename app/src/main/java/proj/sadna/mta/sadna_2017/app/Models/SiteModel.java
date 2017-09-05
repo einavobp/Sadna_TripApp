@@ -1,5 +1,7 @@
 package proj.sadna.mta.sadna_2017.app.Models;
 
+import android.util.Log;
+
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
@@ -25,7 +27,17 @@ public class SiteModel extends SugarRecord
     private String profilePicture;
     private String description;
     private String email;
+    private String googleid;
 
+    public String getGoogleid()
+    {
+        return googleid;
+    }
+
+    public void setGoogleid(String googleid)
+    {
+        this.googleid = googleid;
+    }
 
     public SiteModel(String fullName, String address, String types, ArrayList<String> imageUrl, double lat, double lng, String phoneNumber, String profilePicture, String description, String email)
     {
@@ -196,8 +208,20 @@ public class SiteModel extends SugarRecord
             siteModel.setProfilePicture(sites1.profile_photo);
             siteModel.setDescription(sites1.description);
             siteModel.setEmail("");
+            siteModel.setGoogleid(sites1.place_id);
+            Log.d("gp",sites1.place_id);
             siteModel.save();
         }
+    }
+
+    public static ArrayList<SiteModel> ToList(List<Sites> sites)
+    {
+        ArrayList<SiteModel> sitesPath = new ArrayList<SiteModel>();
+        for (Sites sites1 : sites)
+        {
+            sitesPath.add(SiteModel.find(SiteModel.class, "googleid =?", sites1.place_id).get(0));
+        }
+        return sitesPath;
     }
 
     public String getTypes()

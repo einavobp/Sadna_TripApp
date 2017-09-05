@@ -106,7 +106,7 @@ public class PathOnMapActivity extends AppCompatActivity implements RoutingListe
                 }
 
                 BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-                Routing routing = new Routing.Builder().travelMode(AbstractRouting.TravelMode.DRIVING).withListener(PathOnMapActivity.this).alternativeRoutes(true).waypoints().build();
+                Routing routing = new Routing.Builder().travelMode(AbstractRouting.TravelMode.DRIVING).withListener(PathOnMapActivity.this).alternativeRoutes(true).waypoints(latLngs).build();
                 routing.execute();
 
                 // For zooming automatically to the location of the marker

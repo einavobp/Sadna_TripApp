@@ -16,12 +16,14 @@ import java.util.ArrayList;
 
 import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Adapters.SiteAdapter;
+import proj.sadna.mta.sadna_2017.app.Models.PathModel;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
 
 public class SearchSiteActivity extends AppCompatActivity
 {
     public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 100;
     private static final String TAG = "TAG";
+    private PathModel pathModel = new PathModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,7 +57,11 @@ public class SearchSiteActivity extends AppCompatActivity
 //            }
 //        });
 
-        SiteAdapter mAdapter = new SiteAdapter(this, data);
+        if (getIntent().hasExtra("id"))
+        {
+            pathModel = PathModel.findById(PathModel.class, getIntent().getLongExtra("id", 1));
+        }
+        SiteAdapter mAdapter = new SiteAdapter(this, this, pathModel, data);
         mRecyclerView.setAdapter(mAdapter);
     }
 
