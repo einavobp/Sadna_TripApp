@@ -17,27 +17,48 @@ import java.util.List;
 import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Activities.PathActivity;
 import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
+import proj.sadna.mta.sadna_2017.app.Models.PathModel;
 import proj.sadna.mta.sadna_2017.app.Models.PathModelRec;
+import proj.sadna.mta.sadna_2017.app.interfaces.IOnPathSave;
 
 /**
  * Created by Heiman on 8/25/2017.
  */
 
-public class TopTripsFragment extends Fragment
+public class TopTripsFragment extends Fragment implements IOnPathSave
 {
 
     private SwipeMenuListView mListView;
     private TopTripsAdapter mAdapter;
+    private List<PathModelRec> dataPath;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {// Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_trips, container, false);
         mListView = (SwipeMenuListView) view.findViewById(R.id.top_trips_lv);
-
-        mAdapter = new TopTripsAdapter(PathModelRec.getAll());
+        dataPath = PathModelRec.getAll();
+        mAdapter = new TopTripsAdapter(dataPath);
         mListView.setAdapter(this.mAdapter);
         return view;
+    }
+
+    @Override
+    public void onPathSave(PathModel pathModel)
+    {
+        PathModelRec pathModelRec = new PathModelRec();
+        pathModelRec.setName(pathModel.getName());
+        pathModelRec.setIds(pathModel.getIds());
+        pathModelRec.setRate(pathModel.getRate());
+        onRecPathSave(pathModelRec);
+    }
+
+    @Override
+    public void onRecPathSave(PathModelRec pathModel)
+    {
+        dataPath.add(pathModel);
+        mAdapter.notifyDataSetChanged();
     }
 
     public class TopTripsAdapter extends BaseSwipListAdapter

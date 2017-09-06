@@ -1,6 +1,7 @@
 package proj.sadna.mta.sadna_2017.app.Activities;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,14 +19,15 @@ import java.util.ArrayList;
 
 import proj.sadna.mta.sadna_2017.R;
 import proj.sadna.mta.sadna_2017.app.Adapters.AppPagerAdapter;
-import proj.sadna.mta.sadna_2017.app.Fragments.MyPathsFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.MyTripsFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.NewTripFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.TopTripsFragment;
 import proj.sadna.mta.sadna_2017.app.Fragments.UserSettingsFragment;
+import proj.sadna.mta.sadna_2017.app.Models.PathModel;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.interfaces.HandlePathSaver;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements HandlePathSaver
 {
     private static final int[] TAB_ICONS = {R.drawable.position, R.drawable.others, R.drawable.luggage, R.drawable.settings};
 
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Fragment> pages;
     private int mCurrentTab = -1;
     private SiteModel site = new SiteModel();
+    private int counter1 = 0;
+    private int counter2 = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -179,7 +183,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Fragment> getPages()
     {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new NewTripFragment());
+        fragments.add(new NewTripFragment(this));
         fragments.add(new TopTripsFragment());
         fragments.add(new MyTripsFragment());
         fragments.add(new UserSettingsFragment());
@@ -191,6 +195,31 @@ public class MainActivity extends AppCompatActivity
     {
         mPager = (ViewPager) findViewById(R.id.main_container);
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
+
+    }
+
+    @Override
+    public void savePath(PathModel pathModel)
+    {
+        if (pages != null)
+        {
+//            ((TopTripsFragment) pages.get(1)).onPathSave(pathModel);
+            ((MyTripsFragment) pages.get(2)).onPathSave(pathModel);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK)
+        {
+            Bundle res = data.getExtras();
+            Long result = res.getLong("path_id");
+
+            savePath(PathModel.findById(PathModel.class, result));
+        }
 
     }
 }

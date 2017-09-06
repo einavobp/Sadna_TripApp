@@ -28,6 +28,7 @@ public class SiteModel extends SugarRecord
     private String description;
     private String email;
     private String googleid;
+    private String album;
 
     public String getGoogleid()
     {
@@ -177,7 +178,14 @@ public class SiteModel extends SugarRecord
 
     public ArrayList<String> getImageUrl()
     {
-        return imageUrl;
+
+        String[] album = this.album.split(",");
+        ArrayList<String> strings = new ArrayList<>();
+        for (String s : album)
+        {
+            strings.add(new String(s));
+        }
+        return strings;
     }
 
     public void setImageUrl(ArrayList<String> imageUrl)
@@ -185,23 +193,26 @@ public class SiteModel extends SugarRecord
         this.imageUrl = imageUrl;
     }
 
+    public String getAlbum()
+    {
+        return album;
+    }
+
+    public void setAlbum(String album)
+    {
+        this.album = album;
+    }
 
     public static void saveList(List<Sites> sites)
     {
         for (Sites sites1 : sites)
         {
-            String[] album = sites1.album_photos.split(",");
-            ArrayList<String> strings = new ArrayList<>();
-            for (String s : album)
-            {
-                strings.add(new String(s));
-            }
             SiteModel siteModel = new SiteModel();
             siteModel.setFullName(sites1.name);
             siteModel.setShortName(sites1.name);
             siteModel.setAddress(sites1.formatted_address);
             siteModel.setTypes(sites1.types);
-            siteModel.setImageUrl(strings);
+            siteModel.setAlbum(sites1.album_photos);
             siteModel.setLat(sites1.location_lat);
             siteModel.setLng(sites1.location_lng);
             siteModel.setPhoneNumber(sites1.formatted_phone_number);
@@ -209,7 +220,7 @@ public class SiteModel extends SugarRecord
             siteModel.setDescription(sites1.description);
             siteModel.setEmail("");
             siteModel.setGoogleid(sites1.place_id);
-            Log.d("gp",sites1.place_id);
+            Log.d("gp", sites1.place_id);
             siteModel.save();
         }
     }

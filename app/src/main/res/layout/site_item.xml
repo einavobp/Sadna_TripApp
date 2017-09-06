@@ -60,7 +60,7 @@
                 android:layout_marginTop="13dp"
                 android:text="Site Name"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -69,10 +69,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/site_name"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:text="This is a Short description"
                 android:textColor="@color/grey"
-                android:textSize="14dp"/>
+                android:textSize="12dp"/>
 
             <TextView
                 android:id="@+id/site_category"
@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginBottom="3dp"
                 android:text="museums, kids, indoor"
                 android:textColor="@color/grey2"
                 android:textSize="10sp"/>

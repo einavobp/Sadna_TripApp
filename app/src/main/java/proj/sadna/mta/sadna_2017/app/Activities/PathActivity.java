@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,17 +36,29 @@ import proj.sadna.mta.sadna_2017.app.Adapters.BaseSwipListAdapter;
 import proj.sadna.mta.sadna_2017.app.Models.PathModel;
 import proj.sadna.mta.sadna_2017.app.Models.PathModelRec;
 import proj.sadna.mta.sadna_2017.app.Models.SiteModel;
+import proj.sadna.mta.sadna_2017.app.Network.NetworkManager;
+import proj.sadna.mta.sadna_2017.app.Network.Request.RouteRequest;
+import proj.sadna.mta.sadna_2017.app.Network.Response.RouteResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PathActivity extends AppCompatActivity
 {
 
     private static final int PATH_SIZE = 5;
+    public static String COUPLE_ID = "1";
+    public static String SEASON_ID = "1";
     private List<SiteModel> mAppList;
     private AppAdapter mAdapter;
     private SwipeMenuListView mListView;
     private ImageView mMap;
     private PathModel pathModel = null;
     private PathModelRec pathModelRec = null;
+    private RelativeLayout saveBrn;
+    private RelativeLayout startover_btn;
+    private int counter2 = 0;
+    private int counter1 = 0;
 
 
     @Override
@@ -94,10 +107,67 @@ public class PathActivity extends AppCompatActivity
             }
         });
         mAppList = getSitesFromServer();
+        saveBrn = (RelativeLayout) findViewById(R.id.save_btn);
+        startover_btn = (RelativeLayout) findViewById(R.id.startover_btn);
 
-        mListView = (SwipeMenuListView) findViewById(R.id.my_path);
+        startover_btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                findViewById(R.id.save_start_btn).setVisibility(View.INVISIBLE);
+                counter1++;
+                counter2++;
+                counter1 = (counter1 % 4);
+                SEASON_ID = String.valueOf(counter2 % 4);
+                COUPLE_ID = String.valueOf(counter1 % 4);
 
-        mAdapter = new AppAdapter();
+                NetworkManager.getInstance().calculate(new RouteRequest("1", SEASON_ID, COUPLE_ID, "8:00", "18:00"), new Callback<RouteResponse>()
+                {
+                    @Override
+                    public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response)
+                    {
+                        pathModel = new PathModel("My Path", 0, response.body().sites);
+                        pathModel.save();
+                        mAppList = pathModel.getSiteModels();
+                        mAdapter.notifyDataSetChanged();
+                        findViewById(R.id.save_start_btn).setVisibility(View.VISIBLE);
+                        Toast.makeText(PathActivity.this, "New Path!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<RouteResponse> call, Throwable t)
+                    {
+                        Toast.makeText(PathActivity.this, "Server Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        saveBrn.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View view)
+            {
+                pathModel.setName("My Path " + System.currentTimeMillis());
+                pathModel.save();
+                Intent intent = new Intent();
+                Bundle conData = new Bundle();
+                conData.putLong("path_id", pathModel.getId());
+                intent.putExtras(conData);
+                setResult(RESULT_OK, intent);
+                Toast.makeText(PathActivity.this, "Saved!", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+        mListView = (SwipeMenuListView)
+
+                findViewById(R.id.my_path);
+
+        mAdapter = new
+
+                AppAdapter();
+
         mListView.setAdapter(mAdapter);
 
         // step 1. create a MenuCreator
@@ -141,103 +211,115 @@ public class PathActivity extends AppCompatActivity
 
         // step 2. listener item click event
         mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener()
-        {
-            @Override
-            public boolean onMenuItemClick(final int position, SwipeMenu menu, int index)
-            {
-                SiteModel item = mAppList.get(position);
-                switch (index)
-                {
-                    case 0:
-                        // open
-                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?" +
-                                "&daddr=" + String.valueOf(item.getLat()) + "," + String.valueOf(item.getLng())));
-                        PathActivity.this.startActivity(intent);
 
-                        break;
-                    case 1:
-                        // delete
+                                             {
+                                                 @Override
+                                                 public boolean onMenuItemClick(final int position, SwipeMenu menu, int index)
+                                                 {
+                                                     SiteModel item = mAppList.get(position);
+                                                     switch (index)
+                                                     {
+                                                         case 0:
+                                                             // open
+                                                             final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?" +
+                                                                     "&daddr=" + String.valueOf(item.getLat()) + "," + String.valueOf(item.getLng())));
+                                                             PathActivity.this.startActivity(intent);
 
-                        SweetAlertDialog dialog = new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE).setTitleText("Are you sure?").setContentText("Won't be able to recover this file!").setConfirmText("Yes,delete it!").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
-                        {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog)
-                            {
-                                pathModel.removeSite(mAppList.get(position));
-                                pathModel.save();
-                                mAppList.remove(position);
-                                mAdapter.notifyDataSetChanged();
-                                if (mAppList.size() < PATH_SIZE)
-                                {
-                                    findViewById(R.id.add_site).setVisibility(View.VISIBLE);
-                                    findViewById(R.id.add_site).setOnClickListener(new View.OnClickListener()
-                                    {
-                                        @Override
-                                        public void onClick(View view)
-                                        {
-                                            Intent intent = new Intent(PathActivity.this, SearchSiteActivity.class);
-                                            intent.putExtra("id", pathModel.getId());
-                                            PathActivity.this.startActivityForResult(intent, 111);
-                                        }
-                                    });
-                                }
+                                                             break;
+                                                         case 1:
+                                                             // delete
 
-                                sDialog.setTitleText("Deleted!").setContentText("Your imaginary file has been deleted!").setConfirmText("OK").setConfirmClickListener(null).changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                            }
-                        });
-                        dialog.setCanceledOnTouchOutside(true);
-                        dialog.show();
-                        break;
-                }
-                return false;
-            }
-        });
+                                                             SweetAlertDialog dialog = new SweetAlertDialog(PathActivity.this, SweetAlertDialog.WARNING_TYPE).setTitleText("Are you sure?").setContentText("Won't be able to recover this file!").setConfirmText("Yes,delete it!").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+                                                             {
+                                                                 @Override
+                                                                 public void onClick(SweetAlertDialog sDialog)
+                                                                 {
+                                                                     pathModel.removeSite(mAppList.get(position));
+                                                                     pathModel.save();
+                                                                     mAppList.remove(position);
+                                                                     mAdapter.notifyDataSetChanged();
+                                                                     if (mAppList.size() < PATH_SIZE)
+                                                                     {
+                                                                         findViewById(R.id.add_site).setVisibility(View.VISIBLE);
+                                                                         findViewById(R.id.add_site).setOnClickListener(new View.OnClickListener()
+                                                                         {
+                                                                             @Override
+                                                                             public void onClick(View view)
+                                                                             {
+                                                                                 Intent intent = new Intent(PathActivity.this, SearchSiteActivity.class);
+                                                                                 intent.putExtra("id", pathModel.getId());
+                                                                                 PathActivity.this.startActivityForResult(intent, 111);
+                                                                             }
+                                                                         });
+                                                                     }
+
+                                                                     sDialog.setTitleText("Deleted!").setContentText("Your imaginary file has been deleted!").setConfirmText("OK").setConfirmClickListener(null).changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                                                 }
+                                                             });
+                                                             dialog.setCanceledOnTouchOutside(true);
+                                                             dialog.show();
+                                                             break;
+                                                     }
+                                                     return false;
+                                                 }
+                                             }
+
+        );
 
         // set SwipeListener
         mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener()
-        {
 
-            @Override
-            public void onSwipeStart(int position)
-            {
-                // swipe start
-            }
+                                     {
 
-            @Override
-            public void onSwipeEnd(int position)
-            {
-                // swipe end
-            }
-        });
+                                         @Override
+                                         public void onSwipeStart(int position)
+                                         {
+                                             // swipe start
+                                         }
+
+                                         @Override
+                                         public void onSwipeEnd(int position)
+                                         {
+                                             // swipe end
+                                         }
+                                     }
+
+        );
 
         // set MenuStateChangeListener
         mListView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener()
-        {
-            @Override
-            public void onMenuOpen(int position)
-            {
-            }
 
-            @Override
-            public void onMenuClose(int position)
-            {
-            }
-        });
+                                               {
+                                                   @Override
+                                                   public void onMenuOpen(int position)
+                                                   {
+                                                   }
+
+                                                   @Override
+                                                   public void onMenuClose(int position)
+                                                   {
+                                                   }
+                                               }
+
+        );
 
         // other setting
 //		listView.setCloseInterpolator(new BounceInterpolator());
 
         // test item long click
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-        {
 
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Toast.makeText(getApplicationContext(), position + " long click", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
+                                             {
+
+                                                 @Override
+                                                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+                                                 {
+                                                     Toast.makeText(getApplicationContext(), position + " long click", Toast.LENGTH_SHORT).show();
+                                                     return false;
+                                                 }
+                                             }
+
+        );
 
     }
 
@@ -256,6 +338,7 @@ public class PathActivity extends AppCompatActivity
     {
         if (getIntent().hasExtra("rec_id"))
         {
+            findViewById(R.id.save_start_btn).setVisibility(View.GONE);
             long id = getIntent().getLongExtra("rec_id", 0);
             pathModelRec = PathModelRec.findById(PathModelRec.class, id);
 
@@ -349,7 +432,7 @@ public class PathActivity extends AppCompatActivity
                 new ViewHolder(convertView);
             }
             ViewHolder holder = (ViewHolder) convertView.getTag();
-            SiteModel item = getItem(position);
+            final SiteModel item = getItem(position);
             Glide.with(PathActivity.this).load(item.getProfilePicture()).
                     crossFade().
                     diskCacheStrategy(DiskCacheStrategy.ALL).
@@ -361,7 +444,10 @@ public class PathActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    PathActivity.this.startActivity(new Intent(PathActivity.this, SiteOverviewActivity.class));
+                    Intent intent = new Intent(PathActivity.this, SiteOverviewActivity.class);
+                    intent.putExtra("id", item.getId());
+                    intent.putExtra("noadd", true);
+                    PathActivity.this.startActivity(intent);
                 }
             });
             holder.siteName.setOnClickListener(new View.OnClickListener()
@@ -369,7 +455,10 @@ public class PathActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    PathActivity.this.startActivity(new Intent(PathActivity.this, SiteOverviewActivity.class));
+                    Intent intent = new Intent(PathActivity.this, SiteOverviewActivity.class);
+                    intent.putExtra("id", item.getId());
+                    intent.putExtra("noadd", true);
+                    PathActivity.this.startActivity(intent);
                 }
             });
             return convertView;

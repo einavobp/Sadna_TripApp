@@ -19,6 +19,7 @@ import proj.sadna.mta.sadna_2017.app.Models.PathModel;
 import proj.sadna.mta.sadna_2017.app.Network.NetworkManager;
 import proj.sadna.mta.sadna_2017.app.Network.Request.RouteRequest;
 import proj.sadna.mta.sadna_2017.app.Network.Response.RouteResponse;
+import proj.sadna.mta.sadna_2017.app.interfaces.HandlePathSaver;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,9 +27,19 @@ import retrofit2.Response;
 public class NewTripFragment extends Fragment
 {
 
+    public static final int PATH = 4455;
+    private static String COUPLE_ID = "1";
+    private static String SEASON_ID = "1";
+    HandlePathSaver handlePathSaver;
+
     public NewTripFragment()
     {
 
+    }
+
+    public NewTripFragment(HandlePathSaver handlePathSaver)
+    {
+        this.handlePathSaver = handlePathSaver;
     }
 
     @Override
@@ -44,7 +55,7 @@ public class NewTripFragment extends Fragment
             public void onClick(View view)
             {
 
-                NetworkManager.getInstance().calculate(new RouteRequest("1", "1", "2", "8:00", "18:00"), new Callback<RouteResponse>()
+                NetworkManager.getInstance().calculate(new RouteRequest("1", SEASON_ID, COUPLE_ID, "8:00", "18:00"), new Callback<RouteResponse>()
                 {
                     @Override
                     public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response)
@@ -55,7 +66,7 @@ public class NewTripFragment extends Fragment
 
                         Intent intent = new Intent(getActivity(), PathActivity.class);
                         intent.putExtra("id", pathModel.getId());
-                        startActivity(intent);
+                        startActivityForResult(intent, PATH);
                     }
 
                     @Override

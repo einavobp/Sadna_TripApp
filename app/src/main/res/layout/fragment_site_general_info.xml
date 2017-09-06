@@ -42,7 +42,7 @@
                     android:layout_margin="5dp"
                     android:text="Here will show the full name"
                     android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -50,10 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/site_name"
-                    android:layout_margin="5dp"
+                    android:layout_margin="4dp"
                     android:text="Address..."
                     android:textColor="@color/blueText"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/contact_info"

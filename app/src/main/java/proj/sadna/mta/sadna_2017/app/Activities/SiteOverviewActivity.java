@@ -237,8 +237,12 @@ public class SiteOverviewActivity extends AppCompatActivity
         });
         mPager = (ViewPager) findViewById(R.id.main_container);
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
-        ((TextView) findViewById(R.id.toolbar_site_name)).setText(site.getShortName());
+        ((TextView) findViewById(R.id.toolbar_site_name)).setText(site.getShortName().substring(0, site.getShortName().length() > 14 ? 14 : site.getShortName().length()));
         addBtn = (RelativeLayout) findViewById(R.id.add_btn);
+        if (getIntent().hasExtra("noadd"))
+        {
+            addBtn.setVisibility(View.INVISIBLE);
+        }
         addBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
